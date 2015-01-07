@@ -1,10 +1,12 @@
+var playTimeout;
+
 $(document).ready(function(){
 
 	var numstr = $('#numSet').val();	
 	var numset = numstr.split(',');
-	var step = $('#step').val();
-	
-	console.log(numset);
+	var step = $('#step').val();	
+
+
 	
 	var options = {
 		
@@ -46,31 +48,28 @@ $(document).ready(function(){
 		var numset = numstr.split(',');
 		var step = $('#step').val();
 
-		$.post('get.php',{
+		$.post('post.php',{
 			'action': 'step',
 			'step': step,
 			'num_str': numstr 
 			},function(data){
-			
-			
-			console.log(data);
-			
-			
-			
+					
 			$('#chartdiv').empty();
 			$('#numSet').val(data.num_data);
 			$('#numLabel').text(data.num_str);
 			$('#step').val(data.step);
 			
-			var new_numstr = $('#numSet').val();	
-			var new_numset = numstr.split(',');			
+			var new_numset = data.num_data.split(',');			
 			
 			drawChart(new_numset,options);
 			
 			if(data.sorted){
 				
-				alert('String sorted! Yay!');
+				$('#btnShuffle').prop('disabled','');
+				$('#btnStep').prop('disabled','disabled');
+				$('#btnPlay').prop('disabled','disabled');				
 				
+				clearInterval(playTimeout);
 			}
 			
 			
@@ -79,8 +78,37 @@ $(document).ready(function(){
 		
 	});
 	
+	$('#btnPlay').click(function(){
+		
+		playTimeout = setInterval(function(){ $('#btnStep').trigger('click'); }, 100);			
+		
+	});
+	
+	$('#btnShuffle').click(function(){
+		
+		$.post('post.php',{'action': 'shuffle'},function(data){
+			
+			$('#btnShuffle').prop('disabled','disabled');
+			$('#btnStep').prop('disabled','');
+			$('#btnPlay').prop('disabled','');					
+			
+			$('#chartdiv').empty();
+			$('#numSet').val(data.num_data);
+			$('#numLabel').text(data.num_str);
+			$('#step').val(0);
+			
+			var new_numset = data.num_data.split(',');			
+			
+			drawChart(new_numset,options);			
+			
+		});		
+		
+		
+	});
+	
 	
 });
+
 
 function drawChart(dataset,options){
 	

@@ -36,6 +36,8 @@
         <div class="col-lg-12 text-center">
 		
 		<button id="btnStep" type="button" class="btn btn-primary btn-lg">Step</button>
+		<button id="btnPlay" type="button" class="btn btn-primary btn-lg">Play</button>
+		<button id="btnShuffle" disabled="disabled" type="button" class="btn btn-primary btn-lg">Shuffle</button>
 			
   
 		<?php 
