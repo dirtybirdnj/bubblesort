@@ -59,7 +59,7 @@
       </div>
 
       <footer class="footer">
-        <p>&copy; Mat Gilbert 2014</p>
+        <p>&copy; Mat Gilbert 2015</p>
       </footer>
 
     </div> <!-- /container -->
