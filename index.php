@@ -41,18 +41,14 @@
 			
   
 		<?php 
-			
-		//if($_POST['num_str']) $numbers = ; 
-		//else $numbers = $_POST['num_str'];
 		
-		$numbers = isset($_POST['num_str']) ? $_POST['num_str'] : print_list(generate_numbers(10));
+		$numbers =  print_list(generate_numbers(10));
 		$numbers_val = str_replace(' ','',$numbers);
 		
-		$step = isset($_POST['step']) ? $_POST['step'] : 0;
-		
 		?>
+		
 		<input type="hidden" id="numSet" value="<?php echo $numbers_val; ?>"/>
-		<input type="hidden" id="step" value="<?php echo $step; ?>"/>		
+		<input type="hidden" id="step" value="0"/>		
 		<h2 id="numLabel"><?php echo $numbers; ?></h2>
 
 		<div id="chartdiv" style="height:400px; width:100%; "></div>
