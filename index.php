@@ -8,6 +8,7 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/jumbotron-narrow.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />	
 	
 	<title>Bubble Sort - PHP Backend / jQuery Front End</title>
 	
@@ -19,9 +20,8 @@
       <div class="header">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Shuffle</a></li>
-            <li role="presentation"><a href="#">Step</a></li>
-            <li role="presentation"><a href="#">Play</a></li>
+            <li role="presentation"><p class="btn">Mat Gilbert 2015</p></li>
+     
           </ul>
         </nav>
         <h3 class="text-muted">BubbleSort</h3>
@@ -33,24 +33,30 @@
       </div>
 
       <div class="row marketing">
-        <div class="col-lg-12">
-  
-<?php
+        <div class="col-lg-12 text-center">
+		
+		<button id="btnStep" type="button" class="btn btn-primary btn-lg">Step</button>
 			
-$numbers = generate_numbers(10);
-
-//var_dump($numbers);
-//sort_step(0,$numbers);
-//print_list($numbers);
-//$sorted = is_sorted($numbers);
-//var_dump($sorted);
-
-sort_list($numbers);		
-			
-?>	
   
+		<?php 
+			
+		//if($_POST['num_str']) $numbers = ; 
+		//else $numbers = $_POST['num_str'];
+		
+		$numbers = isset($_POST['num_str']) ? $_POST['num_str'] : print_list(generate_numbers(10));
+		$numbers_val = str_replace(' ','',$numbers);
+		
+		$step = isset($_POST['step']) ? $_POST['step'] : 0;
+		
+		?>
+		<input type="hidden" id="numSet" value="<?php echo $numbers_val; ?>"/>
+		<input type="hidden" id="step" value="<?php echo $step; ?>"/>		
+		<h2 id="numLabel"><?php echo $numbers; ?></h2>
+
+		<div id="chartdiv" style="height:400px; width:100%; "></div>
+
+	  
         </div>
-
 
       </div>
 
@@ -61,9 +67,13 @@ sort_list($numbers);
     </div> <!-- /container -->
 
 
-	
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>	
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="js/jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="js/jqplot/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="js/jqplot/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="js/jqplot/jqplot.pointLabels.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 
